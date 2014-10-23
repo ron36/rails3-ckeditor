@@ -17,7 +17,7 @@ module Ckeditor
       ActionView::Helpers::AssetTagHelper.register_javascript_expansion :ckeditor => ["ckeditor/ckeditor"]
       
       if Object.const_defined?("Formtastic")
-        ::Formtastic::SemanticFormBuilder.send :include, Ckeditor::Hooks::FormtasticBuilder
+        ::Formtastic::Helpers::FormHelper.send :include, Ckeditor::Hooks::FormtasticBuilder
       end
       
       if Object.const_defined?("SimpleForm")
