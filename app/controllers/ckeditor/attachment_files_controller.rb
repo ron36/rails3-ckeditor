@@ -1,8 +1,8 @@
 class Ckeditor::AttachmentFilesController < Ckeditor::BaseController
 
   def index
-    if Ckeditor.file_manager_partition_users and respond_to?(:current_user)
-      @attachments = Ckeditor.file_model.where(:user_id => current_user).order("id DESC")
+    if Ckeditor.file_manager_partition_users and respond_to?(:current_admin_user)
+      @attachments = Ckeditor.file_model.where(:admin_user_id => current_admin_user).order("id DESC")
     else
       @attachments = Ckeditor.file_model.order("id DESC")
     end
@@ -10,8 +10,8 @@ class Ckeditor::AttachmentFilesController < Ckeditor::BaseController
   end
 
   def create
-    if Ckeditor.file_manager_partition_users and respond_to?(:current_user)
-      if Ckeditor.file_model.where(:user_id => current_user).count <= Ckeditor.swf_file_upload_limit
+    if Ckeditor.file_manager_partition_users and respond_to?(:current_admin_user)
+      if Ckeditor.file_model.where(:admin_user_id => current_admin_user).count <= Ckeditor.swf_file_upload_limit
         @attachment = Ckeditor.file_model.new
       end
     else
